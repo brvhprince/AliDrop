@@ -1,0 +1,22 @@
+{
+    "name": "wanpeninsula/ali-drop",
+    "description": "AliExpress Dropshipping API",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Wanpeninsula\\AliDrop\\": "src/",
+            "AESDK\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Prince Takyi Akomea",
+            "email": "prince.akomea.stu@uenr.edu.gh"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "monolog/monolog": "^3.7"
+    }
+}
