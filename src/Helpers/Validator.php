@@ -11,7 +11,7 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Helpers;
+namespace Wanpeninsula\AliDrop\Helpers;
 
 use Contracts\ValidationInterface;
 use Exceptions\ValidationException;
@@ -31,7 +31,7 @@ class Validator implements ValidationInterface
         if (!in_array($value, $allowedValues, true)) {
             throw new ValidationException(
                 "Invalid value for {$fieldName}. Allowed values are: " . implode(', ', $allowedValues),
-                400,
+                422,
                 null,
                 ['field' => $fieldName, 'value' => $value, 'allowed_values' => $allowedValues]
             );
@@ -62,7 +62,7 @@ class Validator implements ValidationInterface
         if (!empty($errors)) {
             throw new ValidationException(
                 "Validation failed for multiple fields",
-                400,
+                422,
                 null,
                 $errors
             );

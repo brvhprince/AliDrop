@@ -11,7 +11,8 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Helpers;
+namespace Wanpeninsula\AliDrop\Helpers;
+
 use Contracts\LoggerInterface;
 use Monolog\Logger as MonologLogger;
 use Monolog\Handler\RotatingFileHandler;

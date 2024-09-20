@@ -12,7 +12,7 @@
 
 namespace Contracts;
 
-use Api\Client;
+use Wanpeninsula\AliDrop\Api\Client;
 
 interface BaseRepositoryInterface
 {

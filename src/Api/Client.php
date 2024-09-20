@@ -10,12 +10,12 @@ declare(strict_types=1);
  *
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
-namespace Api;
+namespace Wanpeninsula\AliDrop\Api;
 
 use Contracts\ApiClientInterface;
 use Exceptions\ApiException;
 use Exceptions\ValidationException;
-use Helpers\Validator;
+use Wanpeninsula\AliDrop\Helpers\Validator;
 use IopClient;
 use IopRequest;
 use Traits\LoggerTrait;

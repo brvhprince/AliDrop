@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Traits;
 
-use Helpers\Logger;
+use Wanpeninsula\AliDrop\Helpers\Logger;
 trait LoggerTrait
 {
     protected function log($level, $message, array $context = []): void

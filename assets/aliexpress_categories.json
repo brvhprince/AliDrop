@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Food",
+        "id": "2"
+    },
+    {
+        "name": "Apparel &amp; Accessories",
+        "id": "3"
+    },
+    {
+        "name": "Home Appliances",
+        "id": "6"
+    },
+    {
+        "name": "Computer &amp; Office",
+        "id": "7"
+    },
+    {
+        "name": "Home Improvement",
+        "id": "13"
+    },
+    {
+        "name": "Home &amp; Garden",
+        "id": "15"
+    },
+    {
+        "name": "Sports &amp; Entertainment",
+        "id": "18"
+    },
+    {
+        "name": "Office &amp; School Supplies",
+        "id": "21"
+    },
+    {
+        "name": "Toys &amp; Hobbies",
+        "id": "26"
+    },
+    {
+        "name": "Security &amp; Protection",
+        "id": "30"
+    },
+    {
+        "name": "Automobiles, Parts &amp; Accessories",
+        "id": "34"
+    },
+    {
+        "name": "Jewelry &amp; Accessories",
+        "id": "36"
+    },
+    {
+        "name": "Lights &amp; Lighting",
+        "id": "39"
+    },
+    {
+        "name": "Consumer Electronics",
+        "id": "44"
+    },
+    {
+        "name": "Beauty &amp; Health",
+        "id": "66"
+    },
+    {
+        "name": "Weddings &amp; Events",
+        "id": "320"
+    },
+    {
+        "name": "Shoes",
+        "id": "322"
+    },
+    {
+        "name": "Electronic Components &amp; Supplies",
+        "id": "502"
+    },
+    {
+        "name": "Phones &amp; Telecommunications",
+        "id": "509"
+    },
+    {
+        "name": "Test category 06",
+        "id": "127698009"
+    },
+    {
+        "name": "Tools",
+        "id": "1420"
+    },
+    {
+        "name": "Mother &amp; Kids",
+        "id": "1501"
+    },
+    {
+        "name": "Furniture",
+        "id": "1503"
+    },
+    {
+        "name": "Watches",
+        "id": "1511"
+    },
+    {
+        "name": "Luggage &amp; Bags",
+        "id": "1524"
+    },
+    {
+        "name": "Women's Clothing",
+        "id": "200000345"
+    },
+    {
+        "name": "Men's Clothing",
+        "id": "200000343"
+    },
+    {
+        "name": "Apparel Accessories",
+        "id": "200000297"
+    },
+    {
+        "name": "Hair Extensions &amp; Wigs",
+        "id": "200165144"
+    },
+    {
+        "name": "Special Category",
+        "id": "200001075"
+    },
+    {
+        "name": "Underwear",
+        "id": "200574005"
+    },
+    {
+        "name": "Novelty &amp; Special Use",
+        "id": "200000532"
+    },
+    {
+        "name": "Virtual Products",
+        "id": "201169612"
+    },
+    {
+        "name": "Sports Shoes,Clothing&amp;Accessories",
+        "id": "201768104"
+    },
+    {
+        "name": "Second-Hand",
+        "id": "201520802"
+    },
+    {
+        "name": "Motorcycle Equipments &amp; Parts",
+        "id": "201355758"
+    }
+]

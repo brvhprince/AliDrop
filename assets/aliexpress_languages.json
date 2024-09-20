@@ -1,0 +1,137 @@
+[
+    {
+        "lowercase": "hi",
+        "uppercase": "IN",
+        "country": "India"
+    },
+    {
+        "lowercase": "de",
+        "uppercase": "DE",
+        "country": "Germany"
+    },
+    {
+        "lowercase": "ru",
+        "uppercase": "RU",
+        "country": "Russia"
+    },
+    {
+        "lowercase": "pt",
+        "uppercase": "PT",
+        "country": "Portugal"
+    },
+    {
+        "lowercase": "pt",
+        "uppercase": "BR",
+        "country": "Brazil"
+    },
+    {
+        "lowercase": "ko",
+        "uppercase": "KR",
+        "country": "South Korea"
+    },
+    {
+        "lowercase": "in",
+        "uppercase": "ID",
+        "country": "Indonesia"
+    },
+    {
+        "lowercase": "en",
+        "uppercase": "US",
+        "country": "United States"
+    },
+    {
+        "lowercase": "en",
+        "uppercase": "GB",
+        "country": "United Kingdom"
+    },
+    {
+        "lowercase": "it",
+        "uppercase": "IT",
+        "country": "Italy"
+    },
+    {
+        "lowercase": "fr",
+        "uppercase": "FR",
+        "country": "France"
+    },
+    {
+        "lowercase": "zh",
+        "uppercase": "CN",
+        "country": "China"
+    },
+    {
+        "lowercase": "zh",
+        "uppercase": "TW",
+        "country": "Taiwan"
+    },
+    {
+        "lowercase": "es",
+        "uppercase": "ES",
+        "country": "Spain"
+    },
+    {
+        "lowercase": "es",
+        "uppercase": "MX",
+        "country": "Mexico"
+    },
+    {
+        "lowercase": "iw",
+        "uppercase": "IL",
+        "country": "Israel"
+    },
+    {
+        "lowercase": "ar",
+        "uppercase": "SA",
+        "country": "Saudi Arabia"
+    },
+    {
+        "lowercase": "ar",
+        "uppercase": "EG",
+        "country": "Egypt"
+    },
+    {
+        "lowercase": "vi",
+        "uppercase": "VN",
+        "country": "Vietnam"
+    },
+    {
+        "lowercase": "th",
+        "uppercase": "TH",
+        "country": "Thailand"
+    },
+    {
+        "lowercase": "uk",
+        "uppercase": "UA",
+        "country": "Ukraine"
+    },
+    {
+        "lowercase": "ja",
+        "uppercase": "JP",
+        "country": "Japan"
+    },
+    {
+        "lowercase": "id",
+        "uppercase": "ID",
+        "country": "Indonesia"
+    },
+    {
+        "lowercase": "pl",
+        "uppercase": "PL",
+        "country": "Poland"
+    },
+    {
+        "lowercase": "he",
+        "uppercase": "IL",
+        "country": "Israel"
+    },
+    {
+        "lowercase": "nl",
+        "uppercase": "NL",
+        "country": "Netherlands"
+    },
+    {
+        "lowercase": "tr",
+        "uppercase": "TR",
+        "country": "Turkey"
+    }
+]

@@ -19,7 +19,7 @@ class ValidationException extends \Exception
 {
     protected ?array $extra = null;
 
-    public function __construct($message = "", $code = 0, \Throwable $previous = null, array $extra = null)
+    public function __construct($message = "", $code = 422, \Throwable $previous = null, array $extra = null)
     {
         parent::__construct($message, $code, $previous);
         $this->extra = $extra;

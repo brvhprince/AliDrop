@@ -10,14 +10,15 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Repositories;
+namespace Wanpeninsula\AliDrop\Repositories;
 
-use Api\Client;
+use Wanpeninsula\AliDrop\Api\Client;
 use Contracts\BaseRepositoryInterface;
 
 class BaseRepository implements BaseRepositoryInterface
 {
     protected Client $apiClient;
+    protected array $results = [];
 
     public function __construct(Client $apiClient)
     {
