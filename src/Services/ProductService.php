@@ -41,5 +41,17 @@ class ProductService
     {
         return $this->productRepository->searchProducts($filters, $page, $limit);
     }
+    /**
+     * Fetch product details
+     * @param string $productId
+     * @param array $params
+     * @return Product
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function single_product(string $productId, array $params = []): Product
+    {
+        return $this->productRepository->findProductById($productId, $params);
+    }
 
 }

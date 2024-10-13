@@ -22,10 +22,15 @@ $appSecret = 'dByevByjWtcMXs6pLyabAus3RxLXL965';
 try {
     $aliDrop = new AliDrop($appKey, $appSecret);
 
-    $products = $aliDrop->products()->search([
-        'query' => 'iphone',
-    ]);
+//    $products = $aliDrop->products()->search([
+//        'query' => 'iphone',
+//    ]);
+    $product = $aliDrop->products()->single_product("1005005939127124");
 
-    var_dump($products);
+    var_dump($product);
 } catch (ValidationException|ApiException $e) {
 }
+
+$callbackUrl = 'http://localhost:3030/callback.php';
+$auth = "https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&redirect_uri=$callbackUrl&client_id=$appKey";
+$aut2 = "https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&redirect_uri=http://localhost:3030/callback.php&client_id=509710";

@@ -182,14 +182,15 @@ class Client implements ApiClientInterface
 
     /**
      * Execute the request
+     * @param string $accessToken
      * @return bool|string
      * @throws ApiException
      */
-    public function execute(): bool|string
+    public function execute(string $accessToken = ''): bool|string
     {
         if ($this->client && $this->request) {
             try {
-                return $this->client->execute($this->request);
+                return $this->client->execute($this->request, $accessToken);
             }
             catch (\Exception $e) {
                 $this->logError("Failed to execute the request", ['exception' => $e->getMessage()]);

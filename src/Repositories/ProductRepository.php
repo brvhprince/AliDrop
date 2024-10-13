@@ -73,10 +73,62 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         }
     }
 
-    public function findProductById($productId)
+    /**
+     * @param string $productId
+     * @param array $params
+     * @return Product
+     * @throws ValidationException|ApiException
+     */
+    public function findProductById(string $productId, array $params): Product
     {
-        $response = $this->apiClient->get("/products/{$productId}");
-        return new Product($response['data']);
+        if (empty($productId)) {
+            throw new ValidationException('Enter a product ID');
+        }
+        $query = [
+            'product_id' => $productId,
+            'target_language' => Localization::getInstance()->getLanguage(),
+            'ship_to_country' => Localization::getInstance()->getCountryCode(),
+            'target_currency' => Localization::getInstance()->getCurrency(),
+            'remove_personal_benefit' => 'false',
+        ];
+
+        if (!empty($params['language'])) {
+            $query['target_language'] = $params['language'];
+        }
+        if (!empty($params['country_code'])) {
+            $query['ship_to_country'] = $params['country_code'];
+        }
+        if (!empty($params['currency'])) {
+            $query['target_currency'] = $params['currency'];
+        }
+        if (isset($params['remove_personal_benefit'])) {
+            $query['remove_personal_benefit'] = $params['remove_personal_benefit'];
+        }
+        $response = $this->apiClient
+            ->requestName('aliexpress.ds.product.get')
+            ->requestParams($query, [
+                'ship_to_country' => Localization::getInstance()->getCountryCodes(),
+                'target_currency' => Localization::getInstance()->getCurrencyCodes(),
+                'target_language' => Localization::getInstance()->getLanguageCodes(),
+                'remove_personal_benefit' => ['true', 'false']
+            ])
+            ->execute();
+
+        $this->processResults($response);
+
+        if (empty($this->results) || (!isset($this->results['code'])) || $this->results['code'] != '0') {
+            $this->logError('Failed to fetch product details', $this->results);
+            throw new ApiException('Failed to fetch product details', 427);
+        }
+        try {
+            // log info
+            $this->logInfo('Product details fetched successfully', $this->results);
+            return new Product($this->results['data']);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch product details', 427, $e);
+        }
     }
 
     /**
