@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Project: AliDrop
  * File: BaseRepository.php
@@ -13,7 +14,7 @@
 namespace Wanpeninsula\AliDrop\Repositories;
 
 use Wanpeninsula\AliDrop\Api\Client;
-use Contracts\BaseRepositoryInterface;
+use Wanpeninsula\AliDrop\Contracts\BaseRepositoryInterface;
 
 class BaseRepository implements BaseRepositoryInterface
 {
@@ -23,6 +24,11 @@ class BaseRepository implements BaseRepositoryInterface
     public function __construct(Client $apiClient)
     {
         $this->apiClient = $apiClient;
+    }
+
+    public function processResults(string|bool $response): void
+    {
+        $this->results = $response ? json_decode($response, true) : [];
     }
 
 

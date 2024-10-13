@@ -11,9 +11,9 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Contracts;
+namespace Wanpeninsula\AliDrop\Contracts;
 
-use Exceptions\ApiException;
+use Wanpeninsula\AliDrop\Exceptions\ApiException;
 
 interface ApiClientInterface
 {
@@ -31,5 +31,6 @@ interface ApiClientInterface
     public function execute();
 
     public function readTimeout(string $timeout);
+    public function setBaseUrl(string $url): void;
 
 }

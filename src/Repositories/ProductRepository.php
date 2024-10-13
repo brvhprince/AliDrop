@@ -13,25 +13,28 @@ declare(strict_types=1);
 
 namespace Wanpeninsula\AliDrop\Repositories;
 
-use Exceptions\ApiException;
-use Exceptions\ValidationException;
-use Models\Product;
+use Wanpeninsula\AliDrop\Exceptions\ApiException;
+use Wanpeninsula\AliDrop\Exceptions\ValidationException;
+use Wanpeninsula\AliDrop\Models\Product;
+use Wanpeninsula\AliDrop\Traits\LoggerTrait;
+use Wanpeninsula\AliDrop\Contracts\ProductRepositoryInterface;
 use Wanpeninsula\AliDrop\Helpers\Localization;
 
-class ProductRepository extends BaseRepository
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
+    use LoggerTrait;
 
     /**
      * Search products
      * @param array $filters
      * @param int $page
      * @param int $limit
-     * @return array|Product[]
-     * @throws ValidationException|ApiException
+     * @return Product[]
+     * @throws ApiException
+     * @throws ValidationException
      */
-    public function searchProducts(array $filters, int $page = 1, int $limit = 10)
+    public function searchProducts(array $filters, int $page = 1, int $limit = 10): array
     {
-//        $allowedFilters = ['query', 'local', 'country_code', 'category_id', 'sort_by', 'currency'];
 
         if (empty($filters['query'])) {
             throw new ValidationException('Enter a search query');
@@ -50,9 +53,24 @@ class ProductRepository extends BaseRepository
             ])
             ->execute();
 
+        $this->processResults($response);
+
+        if (empty($this->results) || (!isset($this->results['code'])) || $this->results['code'] != '0') {
+            $this->logError('Failed to fetch products', $this->results);
+            throw new ApiException('Failed to fetch products', 427);
+        }
+        try {
+            // log info
+            $this->logInfo('Fetched products', $this->results);
+
         return array_map(function($productData) {
             return new Product($productData);
-        }, $response['data']);
+        }, $this->results['data']);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch products', 427, $e);
+        }
     }
 
     public function findProductById($productId)

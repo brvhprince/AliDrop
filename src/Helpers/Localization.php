@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Wanpeninsula\AliDrop\Helpers;
 
 use Wanpeninsula\AliDrop\Contracts\LocalizationInterface;
-use Traits\LoggerTrait;
+use Wanpeninsula\AliDrop\Traits\LoggerTrait;
 
 class Localization implements LocalizationInterface
 {

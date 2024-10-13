@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Wanpeninsula\AliDrop\Helpers;
 
-use Contracts\LoggerInterface;
+use Wanpeninsula\AliDrop\Contracts\LoggerInterface;
 use Monolog\Logger as MonologLogger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
 
 class Logger implements LoggerInterface
 {
-    private static Logger $instance;
+    private static Logger|null $instance = null;
     private MonologLogger $logger;
 
     private function __construct()
@@ -31,21 +33,17 @@ class Logger implements LoggerInterface
         // Create Monolog logger instance
         $this->logger = new MonologLogger('alidrop');
 
-        // Ensure log directory exists
-        if (!is_dir($config['log_dir'])) {
-            mkdir($config['log_dir'], 0755, true);
-        }
 
         $logFile = $config['log_dir'] . DIRECTORY_SEPARATOR . $config['log_file'];
-        $logLevel = constant(MonologLogger::class . '::' . strtoupper($config['log_level']));
 
         // Create a rotating log handler
-        $handler = new RotatingFileHandler($logFile, $config['log_max_files'], $logLevel);
+        $handler = new RotatingFileHandler($logFile, intval($config['log_max_files']), Level::Debug);
         $formatter = new LineFormatter(null, null, true, true);
         $handler->setFormatter($formatter);
 
         // Add handler to Monolog
         $this->logger->pushHandler($handler);
+
     }
 
     public static function getInstance(): self

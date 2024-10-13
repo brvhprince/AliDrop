@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Wanpeninsula\AliDrop\Helpers;
 
-use Contracts\ValidationInterface;
-use Exceptions\ValidationException;
+use Wanpeninsula\AliDrop\Contracts\ValidationInterface;
+use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 
 class Validator implements ValidationInterface
 {

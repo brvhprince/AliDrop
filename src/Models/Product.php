@@ -11,20 +11,33 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Models;
+namespace Wanpeninsula\AliDrop\Models;
 
 class Product
 {
-    public string $id;
-    public string $name;
-    public string $price;
-    public string $stock;
+    public string $page;
+    public string $limit;
+    public string $total;
+    /**
+     * @var list<array{
+     *         score: string,
+     *         salePrice: string,
+     *         cateId: string,
+     *         salePriceFormat: string,
+     *         orders: string,
+     *         itemMainPic: string,
+     *         title: string,
+     *         originalPriceFormat: string,
+     *         itemUrl: string
+     *    }>
+     */
+    public array $products;
 
     public function __construct(array $data)
     {
-        $this->id = $data['id'];
-        $this->name = $data['name'];
-        $this->price = $data['price'];
-        $this->stock = $data['stock'];
+        $this->page = $data['pageIndex'];
+        $this->limit = $data['pageSize'];
+        $this->total = $data['totalCount'];
+        $this->products = $data['products'];
     }
 }

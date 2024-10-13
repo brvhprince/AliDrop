@@ -12,13 +12,16 @@ declare(strict_types=1);
  */
 namespace Wanpeninsula\AliDrop\Api;
 
-use Contracts\ApiClientInterface;
-use Exceptions\ApiException;
-use Exceptions\ValidationException;
-use Wanpeninsula\AliDrop\Helpers\Validator;
+require_once "lib/ae-php-sdk/IopSdk.php";
+
 use IopClient;
 use IopRequest;
-use Traits\LoggerTrait;
+use Wanpeninsula\AliDrop\Contracts\ApiClientInterface;
+use Wanpeninsula\AliDrop\Exceptions\ApiException;
+use Wanpeninsula\AliDrop\Exceptions\ValidationException;
+use Wanpeninsula\AliDrop\Helpers\Validator;
+use Wanpeninsula\AliDrop\Traits\LoggerTrait;
+
 
 class Client implements ApiClientInterface
 {
@@ -134,6 +137,7 @@ class Client implements ApiClientInterface
                 throw $e;
             }
         }
+
         if ($this->request) {
             foreach ($params as $key => $value) {
                $this->requestParam($key, $value);
@@ -145,10 +149,10 @@ class Client implements ApiClientInterface
 
     /**
      * @param string $key
-     * @param string $value
+     * @param string|int $value
      * @throws ApiException
      */
-     function requestParam(string $key, string $value): void
+     function requestParam(string $key, string|int $value): void
      {
         if ($this->request) {
             try {
@@ -197,6 +201,15 @@ class Client implements ApiClientInterface
         }
 
         return false;
+    }
+
+    /**
+     * Set the base URL for the API
+     * @param string $url
+     */
+    public function setBaseUrl(string $url): void
+    {
+        $this->url = $url;
     }
 
 }

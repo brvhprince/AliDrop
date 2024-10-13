@@ -11,7 +11,7 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Exceptions;
+namespace Wanpeninsula\AliDrop\Exceptions;
 
 use ReturnTypeWillChange;
 

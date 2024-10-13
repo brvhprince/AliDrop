@@ -10,12 +10,13 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Contracts;
+namespace Wanpeninsula\AliDrop\Contracts;
 
 use Wanpeninsula\AliDrop\Api\Client;
 
 interface BaseRepositoryInterface
 {
     public function __construct(Client $apiClient);
+    public function processResults(string $response) : void;
 
 }
