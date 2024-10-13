@@ -17,6 +17,7 @@ use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Api\Client;
 use Wanpeninsula\AliDrop\Models\Product;
+use Wanpeninsula\AliDrop\Models\SingleProduct;
 use Wanpeninsula\AliDrop\Repositories\ProductRepository;
 
 class ProductService
@@ -45,11 +46,11 @@ class ProductService
      * Fetch product details
      * @param string $productId
      * @param array $params
-     * @return Product
+     * @return SingleProduct
      * @throws ApiException
      * @throws ValidationException
      */
-    public function single_product(string $productId, array $params = []): Product
+    public function single_product(string $productId, array $params = []): SingleProduct
     {
         return $this->productRepository->findProductById($productId, $params);
     }

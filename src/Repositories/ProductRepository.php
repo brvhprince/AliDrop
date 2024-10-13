@@ -16,6 +16,7 @@ namespace Wanpeninsula\AliDrop\Repositories;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Models\Product;
+use Wanpeninsula\AliDrop\Models\SingleProduct;
 use Wanpeninsula\AliDrop\Traits\LoggerTrait;
 use Wanpeninsula\AliDrop\Contracts\ProductRepositoryInterface;
 use Wanpeninsula\AliDrop\Helpers\Localization;
@@ -76,10 +77,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     /**
      * @param string $productId
      * @param array $params
-     * @return Product
-     * @throws ValidationException|ApiException
+     * @return SingleProduct
+     * @throws ApiException
+     * @throws ValidationException
      */
-    public function findProductById(string $productId, array $params): Product
+    public function findProductById(string $productId, array $params): SingleProduct
     {
         if (empty($productId)) {
             throw new ValidationException('Enter a product ID');
@@ -116,14 +118,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $this->processResults($response);
 
-        if (empty($this->results) || (!isset($this->results['code'])) || $this->results['code'] != '0') {
+        if (empty($this->results) || (!isset($this->results['aliexpress_ds_product_get_response'])) || $this->results['aliexpress_ds_product_get_response']['rsp_code'] != '200') {
             $this->logError('Failed to fetch product details', $this->results);
             throw new ApiException('Failed to fetch product details', 427);
         }
         try {
             // log info
             $this->logInfo('Product details fetched successfully', $this->results);
-            return new Product($this->results['data']);
+            return new SingleProduct($this->results['aliexpress_ds_product_get_response']['result']);
 
         } catch (\Exception $e) {
             $this->logError($e->getMessage());

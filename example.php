@@ -27,7 +27,9 @@ try {
 //    ]);
     $product = $aliDrop->products()->single_product("1005005939127124");
 
-    var_dump($product);
+    echo '<pre>';
+    echo json_encode($product->toArray(), JSON_PRETTY_PRINT);
+    echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
 

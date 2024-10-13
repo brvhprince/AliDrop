@@ -6,3 +6,4 @@ composer.phar
 # composer.lock
 logs/
 codes.txt
+access.json

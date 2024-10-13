@@ -38,6 +38,13 @@ class Client implements ApiClientInterface
     /**
      * @var string
      * @access private
+     * Base URL for fetching the access token
+     * @since 1.0.0
+     */
+    private string $tokenUrl = 'https://api-sg.aliexpress.com/rest';
+    /**
+     * @var string
+     * @access private
      * <p>Get it from the Aliexpress App Console (https://openservice.aliexpress.com) </p>
      * under App Overview after creating an app.
      * @since 1.0.0
@@ -182,15 +189,14 @@ class Client implements ApiClientInterface
 
     /**
      * Execute the request
-     * @param string $accessToken
      * @return bool|string
      * @throws ApiException
      */
-    public function execute(string $accessToken = ''): bool|string
+    public function execute(): bool|string
     {
         if ($this->client && $this->request) {
             try {
-                return $this->client->execute($this->request, $accessToken);
+                return $this->client->execute($this->request, $this->getAccessToken());
             }
             catch (\Exception $e) {
                 $this->logError("Failed to execute the request", ['exception' => $e->getMessage()]);
@@ -211,6 +217,147 @@ class Client implements ApiClientInterface
     public function setBaseUrl(string $url): void
     {
         $this->url = $url;
+    }
+
+    /**
+     * Set the base URL for fetching the access token
+     * @param string $url
+     */
+    public function setTokenUrl(string $url): void
+    {
+        $this->tokenUrl = $url;
+    }
+
+    /**
+     * Get access token
+     * @return string
+     * @throws ApiException
+     */
+    public function getAccessToken(): string
+    {
+        $tokenFile = 'access.json';
+
+        if (file_exists($tokenFile)) {
+            $token = json_decode(file_get_contents($tokenFile), true);
+            if ($token['expire_time'] > time()) {
+                return $token['access_token'];
+            }
+            elseif ($token['refresh_time'] > time()) {
+                return $this->refreshAccessToken($token['refresh_token']);
+            }
+
+            else {
+                return $this->generateAccessToken();
+            }
+        }
+
+        return $this->generateAccessToken();
+
+
+    }
+
+
+    /**
+     * Generate the access token
+     * @return string
+     * @throws ApiException
+     */
+    public function generateAccessToken(): string
+    {
+        $tokenFile = 'access.json';
+
+        if (file_exists($tokenFile)) {
+            $token = json_decode(file_get_contents($tokenFile), true);
+            if ($token['expire_time'] > time()) {
+                return $token['access_token'];
+            }
+        }
+
+        try {
+            $client = new IopClient($this->tokenUrl, $this->appKey, $this->secretKey);
+
+            $request = new IopRequest('/auth/token/create');
+            $request->addApiParam('code','3_509710_qJBcpyjTyppoNu7PObr6xX4C1132');
+
+            $this->logInfo("Requesting access token", ['request' => $request]);
+            $response = $client->execute($request);
+
+            $response = json_decode($response, true);
+
+            if (isset($response['access_token'])) {
+                $token = [
+                    'access_token' => $response['access_token'],
+                    'expire_time' => time() + $response['expire_time'],
+                    'refresh_token' => $response['refresh_token'],
+                    'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
+                ];
+
+                file_put_contents($tokenFile, json_encode($token));
+
+                return $response['access_token'];
+            }
+            else {
+                $this->logError("Failed to generate the access token", ['response' => $response]);
+                throw new ApiException("Failed to generate the access token", 0);
+            }
+        }
+        catch (\Exception $e) {
+            $this->logError("Failed to initialize the token client", ['exception' => $e->getMessage()]);
+            throw new ApiException("Failed to initialize the token client", 0, $e);
+        }
+
+
+
+    }
+
+    /**
+     * Refresh the access token
+     * @param string $refreshToken
+     * @return string
+     * @throws ApiException
+     */
+    public function refreshAccessToken(string $refreshToken): string
+    {
+        $tokenFile = 'access.json';
+
+        if (file_exists($tokenFile)) {
+            $token = json_decode(file_get_contents($tokenFile), true);
+            if ($token['refresh_time'] > time()) {
+                return $token['access_token'];
+            }
+        }
+
+        try {
+            $client = new IopClient($this->tokenUrl, $this->appKey, $this->secretKey);
+
+            $request = new IopRequest('/auth/token/refresh');
+            $request->addApiParam('refresh_token', $refreshToken);
+
+            $response = $client->execute($request);
+
+            $response = json_decode($response, true);
+
+            if (isset($response['access_token'])) {
+                $token = [
+                    'access_token' => $response['access_token'],
+                    'expire_time' => time() + $response['expire_time'],
+                    'refresh_token' => $response['refresh_token'],
+                    'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
+                ];
+
+                file_put_contents($tokenFile, json_encode($token));
+
+                return $response['access_token'];
+            }
+            else {
+                $this->logError("Failed to refresh the access token", ['response' => $response]);
+                throw new ApiException("Failed to refresh the access token", 0);
+            }
+        }
+        catch (\Exception $e) {
+            $this->logError("Failed to initialize the token client", ['exception' => $e->getMessage()]);
+            throw new ApiException("Failed to initialize the token client", 0, $e);
+        }
     }
 
 }
