@@ -17,6 +17,7 @@ use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Api\Client;
 use Wanpeninsula\AliDrop\Models\Categories;
+use Wanpeninsula\AliDrop\Models\FreightOption;
 use Wanpeninsula\AliDrop\Models\Product;
 use Wanpeninsula\AliDrop\Models\SingleCategory;
 use Wanpeninsula\AliDrop\Models\SingleProduct;
@@ -76,6 +77,26 @@ class ProductService
     public function category(string $categoryId): SingleCategory
     {
         return $this->productRepository->fetchCategories($categoryId);
+    }
+
+    /**
+     * Fetch category
+     * @param array{
+     *     product_id: string,
+     *     sku_id: string,
+     *     quantity: int,
+     *     currency?: string,
+     *     country_code?: string,
+     *     language?: string,
+     *     locale?: string,
+     * } $filters
+     * @return FreightOption[]
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function deliveryOptions(array $filters): array
+    {
+        return $this->productRepository->fetchFreightOptions($filters);
     }
 
 }

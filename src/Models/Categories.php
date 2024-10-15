@@ -43,7 +43,7 @@ class Categories
      *  Get the sorted category tree.
      * @return array<int, array{name: string, id: int, sub_categories: array<int, array{name: string, id: int}>}>
      */
-    public function getSortedCategories(): array
+    public function get_sorted_categories(): array
     {
         $categoriesMap = [];
         $mainCategories = [];

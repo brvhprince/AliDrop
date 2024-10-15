@@ -16,6 +16,7 @@ namespace Wanpeninsula\AliDrop\Repositories;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Models\Categories;
+use Wanpeninsula\AliDrop\Models\FreightOption;
 use Wanpeninsula\AliDrop\Models\Product;
 use Wanpeninsula\AliDrop\Models\SingleCategory;
 use Wanpeninsula\AliDrop\Models\SingleProduct;
@@ -174,6 +175,39 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
     /**
+     * @param array $filters
+     * @return FreightOption[]
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function fetchFreightOptions(array $filters): array
+    {
+        $query = $this->buildShippingQuery($filters);
+        $response = $this->apiClient
+            ->requestName('aliexpress.ds.freight.query')
+            ->requestParams([
+                'queryDeliveryReq' => json_encode($query)
+            ])
+            ->execute();
+
+        $this->processResults($response);
+        if (empty($this->results) || (!isset($this->results['aliexpress_ds_freight_query_response'])) || $this->results['aliexpress_ds_freight_query_response']['result']['code'] != '200') {
+            $this->logError('Failed to freight options', $this->results);
+            throw new ApiException('Failed to fetch freight options', 427);
+        }
+        try {
+            $options = $this->results['aliexpress_ds_freight_query_response']['result']['delivery_options']['delivery_option_d_t_o'];
+             return array_map(function($option) {
+            return new FreightOption($option);
+             }, $options);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch product categories', 427, $e);
+        }
+    }
+
+    /**
      * Format query structure for API
      * @param array $filters
      * @param int $page
@@ -210,6 +244,55 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         if (!empty($filters['sort_by'])) {
             $query['sortBy'] = $filters['sort_by'];
+        }
+
+        return $query;
+
+    }
+
+    /**
+     * Format query structure for Shipping API
+     * @param array $filters
+     * @return array
+     * @throws ValidationException
+     */
+    public function buildShippingQuery(array $filters): array
+    {
+        if (empty($filters['product_id'])) {
+            throw new ValidationException('Product id is required');
+        }
+        if (empty($filters['sku_id'])) {
+            throw new ValidationException('Selected product sku is required');
+        }
+        if (empty($filters['quantity'])) {
+            throw new ValidationException('Product quantity to be shipped is required');
+        }
+
+        $query = [
+            'language' => Localization::getInstance()->getLanguage(),
+            'locale' => Localization::getInstance()->getLanguage(),
+            'shipToCountry' => Localization::getInstance()->getCountryCode(),
+            'currency' => Localization::getInstance()->getCurrency(),
+            'quantity' => $filters['quantity'],
+            'productId' => $filters['product_id'],
+            'selectedSkuId' => $filters['sku_id'],
+        ];
+
+        if (!empty($filters['currency'])) {
+            $query['currency'] = $filters['currency'];
+        }
+
+        if (!empty($filters['country_code'])) {
+            $query['shipToCountry'] = $filters['country_code'];
+        }
+
+        if (!empty($filters['language'])) {
+            $query['language'] = $filters['language'];
+            $query['locale'] = $filters['language'];
+        }
+
+        if (!empty($filters['locale'])) {
+            $query['locale'] = $filters['locale'];
         }
 
         return $query;

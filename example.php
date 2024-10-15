@@ -27,10 +27,15 @@ try {
 //    ]);
 //    $product = $aliDrop->products()->single_product("1005005939127124");
 //    $categories = $aliDrop->products()->categories();
-    $category = $aliDrop->products()->category("201376702");
+//    $category = $aliDrop->products()->category("201376702");
+    $deliveryOptions = $aliDrop->products()->deliveryOptions([
+        "product_id" => "1005005939127124",
+        "quantity" => 1,
+        "sku_id" => "12000034939242508",
+    ]);
 
     echo '<pre>';
-    echo json_encode($category->toArray(), JSON_PRETTY_PRINT);
+    echo json_encode($deliveryOptions, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }

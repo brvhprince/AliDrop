@@ -34,7 +34,7 @@ class Localization implements LocalizationInterface
     public function __construct()
     {
         $this->language = 'en';
-        $this->currency = 'GHS';
+        $this->currency = 'USD';
         $this->countryCode = 'GH';
 
         if (file_exists(self::$assetPath . 'aliexpress_languages.json')) {
