@@ -15,7 +15,9 @@ namespace Wanpeninsula\AliDrop\Repositories;
 
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
+use Wanpeninsula\AliDrop\Models\Categories;
 use Wanpeninsula\AliDrop\Models\Product;
+use Wanpeninsula\AliDrop\Models\SingleCategory;
 use Wanpeninsula\AliDrop\Models\SingleProduct;
 use Wanpeninsula\AliDrop\Traits\LoggerTrait;
 use Wanpeninsula\AliDrop\Contracts\ProductRepositoryInterface;
@@ -130,6 +132,44 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         } catch (\Exception $e) {
             $this->logError($e->getMessage());
             throw new ApiException('Failed to fetch product details', 427, $e);
+        }
+    }
+
+    /**
+     * @param ?string $categoryId - fetch single category if not null
+     * @return Categories|SingleCategory
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function fetchCategories(?string $categoryId): Categories|SingleCategory
+    {
+        $query = [
+            'language' => Localization::getInstance()->getLanguage(),
+        ];
+
+        if (!empty($categoryId)) {
+            $query['categoryId'] = $categoryId;
+        }
+
+        $response = $this->apiClient
+            ->requestName('aliexpress.ds.category.get')
+            ->requestParams($query, [
+                'language' => Localization::getInstance()->getLanguageCodes()
+            ])
+            ->execute();
+
+        $this->processResults($response);
+        if (empty($this->results) || (!isset($this->results['aliexpress_ds_category_get_response'])) || $this->results['aliexpress_ds_category_get_response']['resp_result']['resp_code'] != '200') {
+            $this->logError('Failed to fetch categories', $this->results);
+            throw new ApiException('Failed to fetch categories', 427);
+        }
+        try {
+            $rawCategories = $this->results['aliexpress_ds_category_get_response']['resp_result']['result']['categories']['category'];
+             return $categoryId ? new SingleCategory($rawCategories) : new Categories($rawCategories);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch product categories', 427, $e);
         }
     }
 

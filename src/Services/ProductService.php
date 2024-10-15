@@ -16,7 +16,9 @@ namespace Wanpeninsula\AliDrop\Services;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Api\Client;
+use Wanpeninsula\AliDrop\Models\Categories;
 use Wanpeninsula\AliDrop\Models\Product;
+use Wanpeninsula\AliDrop\Models\SingleCategory;
 use Wanpeninsula\AliDrop\Models\SingleProduct;
 use Wanpeninsula\AliDrop\Repositories\ProductRepository;
 
@@ -53,6 +55,27 @@ class ProductService
     public function single_product(string $productId, array $params = []): SingleProduct
     {
         return $this->productRepository->findProductById($productId, $params);
+    }
+    /**
+     * Fetch categories
+     * @return Categories
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function categories(): Categories
+    {
+        return $this->productRepository->fetchCategories(null);
+    }
+    /**
+     * Fetch category
+     * @param string $categoryId
+     * @return SingleCategory
+     * @throws ApiException
+     * @throws ValidationException
+     */
+    public function category(string $categoryId): SingleCategory
+    {
+        return $this->productRepository->fetchCategories($categoryId);
     }
 
 }

@@ -277,7 +277,7 @@ class Client implements ApiClientInterface
             $client = new IopClient($this->tokenUrl, $this->appKey, $this->secretKey);
 
             $request = new IopRequest('/auth/token/create');
-            $request->addApiParam('code','3_509710_qJBcpyjTyppoNu7PObr6xX4C1132');
+            $request->addApiParam('code','3_509710_5OwTK42N4w5DhTdQLvkD2oIy1380');
 
             $this->logInfo("Requesting access token", ['request' => $request]);
             $response = $client->execute($request);

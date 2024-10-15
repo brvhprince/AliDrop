@@ -25,10 +25,12 @@ try {
 //    $products = $aliDrop->products()->search([
 //        'query' => 'iphone',
 //    ]);
-    $product = $aliDrop->products()->single_product("1005005939127124");
+//    $product = $aliDrop->products()->single_product("1005005939127124");
+//    $categories = $aliDrop->products()->categories();
+    $category = $aliDrop->products()->category("201376702");
 
     echo '<pre>';
-    echo json_encode($product->toArray(), JSON_PRETTY_PRINT);
+    echo json_encode($category->toArray(), JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
