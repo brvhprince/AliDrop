@@ -28,14 +28,34 @@ try {
 //    $product = $aliDrop->products()->single_product("1005005939127124");
 //    $categories = $aliDrop->products()->categories();
 //    $category = $aliDrop->products()->category("201376702");
-    $deliveryOptions = $aliDrop->products()->deliveryOptions([
-        "product_id" => "1005005939127124",
-        "quantity" => 1,
-        "sku_id" => "12000034939242508",
+//    $deliveryOptions = $aliDrop->products()->deliveryOptions([
+//        "product_id" => "1005005939127124",
+//        "quantity" => 1,
+//        "sku_id" => "12000034939242508",
+//    ]);
+
+    $placeOrder = $aliDrop->orders()->placeOrder([
+       "order_id" => "abc12344",
+        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
+        "city" => "Sunyani",
+        "province" => "Bono Region",
+        "postcode" => "00233",
+        "phone_number" => "233553872291",
+        "full_name" => "Prince Takyi Akomea",
+        "country" => "GH",
+        "items" => [
+            [
+                "product_id" => 1005005939127124,
+                "quantity" => 1,
+                "sku_id" => "12000034939242508",
+                "shipping_service" => "AliExpress Standard Shipping",
+                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
+            ]
+        ]
     ]);
 
     echo '<pre>';
-    echo json_encode($deliveryOptions, JSON_PRETTY_PRINT);
+    echo json_encode($placeOrder, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
