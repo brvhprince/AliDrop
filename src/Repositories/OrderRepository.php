@@ -13,8 +13,10 @@
 namespace Wanpeninsula\AliDrop\Repositories;
 
 use Wanpeninsula\AliDrop\Contracts\OrderRepositoryInterface;
+use Wanpeninsula\AliDrop\Helpers\Localization;
 use Wanpeninsula\AliDrop\Models\ExternalOrderItem;
 use Wanpeninsula\AliDrop\Models\OrderDetails;
+use Wanpeninsula\AliDrop\Models\TrackingDetails;
 use Wanpeninsula\AliDrop\Traits\LoggerTrait;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
@@ -96,6 +98,51 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         } catch (\Exception $e) {
             $this->logError($e->getMessage());
             throw new ApiException('Failed to fetch order details', 427, $e);
+        }
+    }
+
+    /**
+     * Get order details
+     * @param int $order_id
+     * @param ?string $language
+     * @return TrackingDetails
+     * @throws ValidationException
+     * @throws ApiException
+     */
+    public function trackOrder(int $order_id, ?string $language): TrackingDetails
+    {
+        if (empty($order_id)) {
+            throw new ValidationException('Order ID is required');
+        }
+        $query = [
+            'ae_order_id' => $order_id,
+            'language' => Localization::getInstance()->getLanguage(),
+        ];
+        if ($language !==null) {
+            $query['language'] = $language;
+        }
+
+        $response = $this->apiClient
+            ->requestName('aliexpress.ds.order.tracking.get')
+            ->requestParams($query, [
+                'language' => Localization::getInstance()->getLanguageCodes()
+            ])
+            ->execute();
+
+        $this->processResults($response);
+        if (empty($this->results) || (!isset($this->results['aliexpress_ds_order_tracking_get_response'])) || $this->results['aliexpress_ds_order_tracking_get_response']['result']['ret'] !== true) {
+            $this->logError('Failed to fetch order tracking details', $this->results);
+            throw new ApiException('Failed to fetch order tracking details', 427);
+        }
+        try {
+            $res = $this->results['aliexpress_ds_order_tracking_get_response']['result']['data'];
+            // log
+            $this->logInfo('Order tracking details', $res);
+            return new TrackingDetails($res['tracking_detail_line_list']['tracking_detail'][0]);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch order tracking details', 427, $e);
         }
     }
 

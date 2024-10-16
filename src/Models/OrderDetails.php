@@ -43,6 +43,10 @@ class OrderDetails
      * @var array{
      *     id: ?string,
      *     name: ?string,
+     *     all?: array{
+     *         logistics_no: string,
+     *          logistics_service: string,
+     *     }
      *     url: string
      * }
      *     Store information
@@ -192,16 +196,21 @@ class OrderDetails
         ];
         $logisticsInfo = $orderDetails['logistics_info_list'];
         if (empty($logisticsInfo)) {
-            $logisticsInfo = [
-                'logistics_no' => null,
-                'logistics_service' => null
+            $this->shipping = [
+                'service' => null,
+                'code' => null,
+                'status' => $orderDetails['logistics_status']
             ];
         }
-        $this->shipping = [
-            'service' => $logisticsInfo['logistics_service'],
-            'code' => $logisticsInfo['logistics_no'],
-            'status' => $orderDetails['logistics_status']
-        ];
+        else {
+            $this->shipping = [
+                'service' => $logisticsInfo['aeop_order_logistics_info'][0]['logistics_service'],
+                'code' => $logisticsInfo['aeop_order_logistics_info'][0]['logistics_no'],
+                'all' => $logisticsInfo['aeop_order_logistics_info'],
+                'status' => $orderDetails['logistics_status']
+            ];
+        }
+
         $this->store = [
             'id' => $orderDetails['store_info']['store_id'],
             'name' => $orderDetails['store_info']['store_name'],

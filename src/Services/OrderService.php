@@ -16,6 +16,7 @@ use Wanpeninsula\AliDrop\Api\Client;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
 use Wanpeninsula\AliDrop\Models\OrderDetails;
+use Wanpeninsula\AliDrop\Models\TrackingDetails;
 use Wanpeninsula\AliDrop\Repositories\OrderRepository;
 
 class OrderService
@@ -77,6 +78,17 @@ protected OrderRepository $orderRepository;
     public function order_details(int $order_id): OrderDetails
     {
         return $this->orderRepository->getOrder($order_id);
+    }
+    /**
+     * Get order details
+     * @param int $order_id
+     * @param ?string $language
+     * @return TrackingDetails
+     * @throws ApiException|ValidationException
+     */
+    public function track_order(int $order_id, ?string $language = null): TrackingDetails
+    {
+        return $this->orderRepository->trackOrder($order_id, $language);
     }
 
 }

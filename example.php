@@ -39,6 +39,9 @@ try {
     $egOrderNumber = "3043208031562816";
     $egOrderNumber2 = "3043104342182816";
     $egOrderNumber3 = "3043170441622816";
+    $egOrderNumber4 = "3040800007322816"; // with tracking data
+    $egOrderNumber5 = "3039084356962816"; // with tracking data
+    $egOrderNumber6 = "3039955270632816"; // with tracking data
 //    $placeOrder = $aliDrop->orders()->place_order([
 //       "order_id" => "abc12344997aw",
 //        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
@@ -67,10 +70,12 @@ try {
 //        ]
 //    ]);
 
-    $order = $aliDrop->orders()->order_details($egOrderNumber3);
+//    $order = $aliDrop->orders()->order_details($egOrderNumber4);
+
+    $orderTracking = $aliDrop->orders()->track_order($egOrderNumber5);
 
     echo '<pre>';
-    echo json_encode($order, JSON_PRETTY_PRINT);
+    echo json_encode($orderTracking, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
