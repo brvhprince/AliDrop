@@ -34,7 +34,14 @@ class ProductService
 
     /**
      * Search for products
-     * @param array $filters
+     * @param array{
+     *     query: string,
+     *     local?: string,
+     *     country_code?: string,
+     *     currency?: string,
+     *     category_id?: string,
+     *     sort_by?: string,
+     * } $filters
      * @param int $page
      * @param int $limit
      * @return array{page: int, limit: int, total: int, products: Product[]}
@@ -48,7 +55,12 @@ class ProductService
     /**
      * Fetch product details
      * @param string $productId
-     * @param array $params
+     * @param array{
+     *     language?: string,
+     *     country_code?: string,
+     *     currency?: string,
+     *     remove_personal_benefit?: string,
+     * } $params
      * @return SingleProduct
      * @throws ApiException
      * @throws ValidationException

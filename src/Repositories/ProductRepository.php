@@ -52,7 +52,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
                 'countryCode' => Localization::getInstance()->getCountryCodes(),
                 'currency' => Localization::getInstance()->getCurrencyCodes(),
                 'local' => Localization::getInstance()->getLanguageCodes(),
-                'categoryId' => Localization::getInstance()->getCategoryIds(),
                 'sortBy' => ['min_price,desc', 'min_price,asc', 'orders,desc', 'orders,asc', 'comments,desc', 'comments,asc']
             ])
             ->execute();
@@ -64,8 +63,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             throw new ApiException('Failed to fetch products', 427);
         }
         try {
-            // log info
-            $this->logInfo('Fetched products', $this->results);
+
             $searchResults = $this->results['aliexpress_ds_text_search_response']['data'];
             $returnData = [
                 'page' => (int) $searchResults['pageIndex'],
