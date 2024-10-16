@@ -37,7 +37,7 @@ class ProductService
      * @param array $filters
      * @param int $page
      * @param int $limit
-     * @return Product[]
+     * @return array{page: int, limit: int, total: int, products: Product[]}
      * @throws ApiException
      * @throws ValidationException
      */

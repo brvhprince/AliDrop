@@ -33,7 +33,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      * @param array $filters
      * @param int $page
      * @param int $limit
-     * @return Product[]
+     * @return array
      * @throws ApiException
      * @throws ValidationException
      */
@@ -59,18 +59,25 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $this->processResults($response);
 
-        if (empty($this->results) || (!isset($this->results['code'])) || $this->results['code'] != '0') {
+        if (empty($this->results) || (!isset($this->results['aliexpress_ds_text_search_response'])) || $this->results['aliexpress_ds_text_search_response']['code'] != '00') {
             $this->logError('Failed to fetch products', $this->results);
             throw new ApiException('Failed to fetch products', 427);
         }
         try {
             // log info
             $this->logInfo('Fetched products', $this->results);
+            $searchResults = $this->results['aliexpress_ds_text_search_response']['data'];
+            $returnData = [
+                'page' => (int) $searchResults['pageIndex'],
+                'limit' => (int) $searchResults['pageSize'],
+                'total' => (int) $searchResults['totalCount'],
+                'products' => []
+            ];
 
-        return array_map(function($productData) {
-            return new Product($productData);
-        }, $this->results['data']);
-
+            foreach ($searchResults['products']['selection_search_product'] ?? [] as $productData) {
+                $returnData['products'][] = new Product($productData);
+            }
+        return $returnData;
         } catch (\Exception $e) {
             $this->logError($e->getMessage());
             throw new ApiException('Failed to fetch products', 427, $e);

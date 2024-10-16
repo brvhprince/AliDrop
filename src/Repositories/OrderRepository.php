@@ -136,8 +136,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         }
         try {
             $res = $this->results['aliexpress_ds_order_tracking_get_response']['result']['data'];
-            // log
-            $this->logInfo('Order tracking details', $res);
+
             return new TrackingDetails($res['tracking_detail_line_list']['tracking_detail'][0]);
 
         } catch (\Exception $e) {

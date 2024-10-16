@@ -22,9 +22,9 @@ $appSecret = 'dByevByjWtcMXs6pLyabAus3RxLXL965';
 try {
     $aliDrop = new AliDrop($appKey, $appSecret);
 
-//    $products = $aliDrop->products()->search([
-//        'query' => 'iphone',
-//    ]);
+    $products = $aliDrop->products()->search([
+        'query' => 'iphone',
+    ]);
 //    $product = $aliDrop->products()->single_product("1005007773422239");
 //    $categories = $aliDrop->products()->categories();
 //    $category = $aliDrop->products()->category("201376702");
@@ -72,10 +72,10 @@ try {
 
 //    $order = $aliDrop->orders()->order_details($egOrderNumber4);
 
-    $orderTracking = $aliDrop->orders()->track_order($egOrderNumber5);
+//    $orderTracking = $aliDrop->orders()->track_order($egOrderNumber5);
 
     echo '<pre>';
-    echo json_encode($orderTracking, JSON_PRETTY_PRINT);
+    echo json_encode($products, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
