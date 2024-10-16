@@ -277,7 +277,7 @@ class Client implements ApiClientInterface
             $client = new IopClient($this->tokenUrl, $this->appKey, $this->secretKey);
 
             $request = new IopRequest('/auth/token/create');
-            $request->addApiParam('code','3_509710_5OwTK42N4w5DhTdQLvkD2oIy1380');
+            $request->addApiParam('code','3_509710_41GJkHafEq9BCdPMNZiq3Bzg2139');
 
             $this->logInfo("Requesting access token", ['request' => $request]);
             $response = $client->execute($request);
@@ -287,7 +287,7 @@ class Client implements ApiClientInterface
             if (isset($response['access_token'])) {
                 $token = [
                     'access_token' => $response['access_token'],
-                    'expire_time' => time() + $response['expire_time'],
+                    'expire_time' => time() + floor($response['expire_time'] / 1000),
                     'refresh_token' => $response['refresh_token'],
                     'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
                 ];
@@ -340,7 +340,7 @@ class Client implements ApiClientInterface
             if (isset($response['access_token'])) {
                 $token = [
                     'access_token' => $response['access_token'],
-                    'expire_time' => time() + $response['expire_time'],
+                    'expire_time' => time() + floor($response['expire_time'] / 1000),
                     'refresh_token' => $response['refresh_token'],
                     'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
                 ];

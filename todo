@@ -1,5 +1,5 @@
 MAJOR ENDPOINTS
-4- place order - aliexpress.trade.buy.placeorder
+4- place order - aliexpress.trade.buy.placeorder - old endpoint
 
 
 MINOR ENDPOINTS
@@ -7,6 +7,8 @@ MINOR ENDPOINTS
 2- Restricted names - aliexpress.ds.address.get
 3- Feed list (all of them)
 4- freight calculation - aliexpress.logistics.buyer.freight.calculate -- for buyers
+get products special info - aliexpress.ds.product.specialinfo.get
+get member benefits - aliexpress.ds.member.benefit.get
 
 DONE
 6- Get category - aliexpress.ds.category.get
