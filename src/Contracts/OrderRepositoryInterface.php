@@ -12,9 +12,11 @@
 
 namespace Wanpeninsula\AliDrop\Contracts;
 
+use Wanpeninsula\AliDrop\Models\OrderDetails;
+
 interface OrderRepositoryInterface
 {
     public function placeOrder(array $params): array;
-    public function getOrder(int $order_id): array;
+    public function getOrder(int $order_id): OrderDetails;
 
 }

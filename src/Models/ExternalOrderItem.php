@@ -21,10 +21,10 @@ class ExternalOrderItem
     private int $productId;
 
     /**
-     * External product SKU ID
+     * External product SKU Attribute
      * @var string
      */
-    private string $skuId;
+    private string $skuAttr;
     /**
      * Quantity of the product
      * @var int
@@ -46,15 +46,15 @@ class ExternalOrderItem
     /**
      * ExternalOrderItem constructor.
      * @param int $productId
-     * @param string $skuId
+     * @param string $skuAttr
      * @param int $quantity
      * @param string|null $logisticsServiceName
      * @param string|null $comments
      */
-    public function __construct(int $productId, string $skuId, int $quantity, ?string $logisticsServiceName = null, ?string $comments = null)
+    public function __construct(int $productId, string $skuAttr, int $quantity, ?string $logisticsServiceName = null, ?string $comments = null)
     {
         $this->productId = $productId;
-        $this->skuId = $skuId;
+        $this->skuAttr = $skuAttr;
         $this->quantity = $quantity;
         $this->logisticsServiceName = $logisticsServiceName;
         $this->comments = $comments;
@@ -75,7 +75,7 @@ class ExternalOrderItem
      */
     public function getSkuId(): string
     {
-        return $this->skuId;
+        return $this->skuAttr;
     }
 
     /**

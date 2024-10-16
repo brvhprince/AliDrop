@@ -14,6 +14,7 @@ namespace Wanpeninsula\AliDrop\Repositories;
 
 use Wanpeninsula\AliDrop\Contracts\OrderRepositoryInterface;
 use Wanpeninsula\AliDrop\Models\ExternalOrderItem;
+use Wanpeninsula\AliDrop\Models\OrderDetails;
 use Wanpeninsula\AliDrop\Traits\LoggerTrait;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
@@ -52,10 +53,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             throw new ApiException('Failed to place order', 427);
         }
         try {
-            $options = $this->results['aliexpress_ds_order_create_response']['result']['order_list'];
-            // log order
-            $this->logInfo('Order placed', $options);
-            return $options;
+            return $this->results['aliexpress_ds_order_create_response']['result']['order_list'];
 
         } catch (\Exception $e) {
             $this->logError($e->getMessage());
@@ -63,9 +61,42 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         }
     }
 
-    public function getOrder(int $order_id): array
+    /**
+     * Get order details
+     * @param int $order_id
+     * @return OrderDetails
+     * @throws ValidationException
+     * @throws ApiException
+     */
+    public function getOrder(int $order_id): OrderDetails
     {
-        return  [];
+        if (empty($order_id)) {
+            throw new ValidationException('Order ID is required');
+        }
+        $query = [
+            'order_id' => $order_id,
+        ];
+
+        $response = $this->apiClient
+            ->requestName('aliexpress.trade.ds.order.get')
+            ->requestParams([
+                'single_order_query' => json_encode($query)
+            ])
+            ->execute();
+
+        $this->processResults($response);
+        if (empty($this->results) || (!isset($this->results['aliexpress_trade_ds_order_get_response'])) || !$this->results['aliexpress_trade_ds_order_get_response']['result']) {
+            $this->logError('Failed to fetch order details', $this->results);
+            throw new ApiException('Failed to fetch order details', 427);
+        }
+        try {
+            $res = $this->results['aliexpress_trade_ds_order_get_response']['result'];
+            return new OrderDetails($res);
+
+        } catch (\Exception $e) {
+            $this->logError($e->getMessage());
+            throw new ApiException('Failed to fetch order details', 427, $e);
+        }
     }
 
     /**
@@ -76,7 +107,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
      */
     private function buildLogisticsAddress(array $params): array
     {
-        $requiredFields = ['address', 'city', 'country', 'full_name', 'phone_number', 'province'];
+        $requiredFields = ['address', 'city', 'country', 'full_name', 'phone_number', 'province', 'phone_code'];
 
         foreach ($requiredFields as $field) {
             if (!isset($params[$field])) {
@@ -91,7 +122,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'country' => $params['country'],
             'full_name' => $params['full_name'],
             'mobile_no' => $params['phone_number'],
-//            'phone_country' => $params['phone_country'], // to be reviewed
+            'phone_country' => $params['phone_code'],
             'province' => $params['province'],
         ];
 
@@ -177,7 +208,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     private function buildProductItems(array $items): array
     {
         $externalOrderItems = [];
-        $requiredFields = ['product_id', 'quantity', 'sku_id'];
+        $requiredFields = ['product_id', 'quantity', 'sku_attr'];
         foreach ($items as $item) {
             foreach ($requiredFields as $field) {
                 if (!isset($item[$field])) {
@@ -186,7 +217,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             }
             $externalOrderItem = new ExternalOrderItem(
                 $item['product_id'],
-                $item['sku_id'],
+                $item['sku_attr'],
                 $item['quantity'],
                 $item['shipping_service'],
                 $item['comment']

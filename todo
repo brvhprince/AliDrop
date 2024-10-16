@@ -2,7 +2,7 @@ MAJOR ENDPOINTS
 1- order details - aliexpress.trade.ds.order.get
 3- order tracking - aliexpress.ds.order.tracking.get
 4- place order - aliexpress.trade.buy.placeorder
-5- Order and pay - aliexpress.ds.order.create
+
 
 MINOR ENDPOINTS
 1- image search - aliexpress.ds.image.search
@@ -13,3 +13,4 @@ MINOR ENDPOINTS
 DONE
 6- Get category - aliexpress.ds.category.get
 2- Freight query (shipping info) - aliexpress.ds.freight.query
+5- Order and pay - aliexpress.ds.order.create

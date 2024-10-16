@@ -15,6 +15,7 @@ namespace Wanpeninsula\AliDrop\Services;
 use Wanpeninsula\AliDrop\Api\Client;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Exceptions\ValidationException;
+use Wanpeninsula\AliDrop\Models\OrderDetails;
 use Wanpeninsula\AliDrop\Repositories\OrderRepository;
 
 class OrderService
@@ -35,6 +36,7 @@ protected OrderRepository $orderRepository;
      *     full_name: string,
      *     phone_number: string,
      *     province: string,
+     *     phone_code: string,
      *     address2?: string,
      *     contact_person?: string,
      *     locale?: string,
@@ -53,7 +55,7 @@ protected OrderRepository $orderRepository;
      *     items: list<array{
      *     product_id: int,
      *     quantity: int,
-     *     sku_id: string,
+     *     sku_attr: string,
      *     shipping_service?: string,
      *     comment?: string
      *    }>
@@ -61,9 +63,20 @@ protected OrderRepository $orderRepository;
      * @return array{int}
      * @throws ValidationException|ApiException
      */
-    public function placeOrder(array $params): array
+    public function place_order(array $params): array
     {
         return $this->orderRepository->placeOrder($params);
+    }
+
+    /**
+     * Get order details
+     * @param int $order_id
+     * @return OrderDetails
+     * @throws ApiException|ValidationException
+     */
+    public function order_details(int $order_id): OrderDetails
+    {
+        return $this->orderRepository->getOrder($order_id);
     }
 
 }

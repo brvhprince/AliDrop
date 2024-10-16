@@ -25,7 +25,7 @@ try {
 //    $products = $aliDrop->products()->search([
 //        'query' => 'iphone',
 //    ]);
-//    $product = $aliDrop->products()->single_product("1005005939127124");
+//    $product = $aliDrop->products()->single_product("1005007773422239");
 //    $categories = $aliDrop->products()->categories();
 //    $category = $aliDrop->products()->category("201376702");
 //    $deliveryOptions = $aliDrop->products()->deliveryOptions([
@@ -34,28 +34,43 @@ try {
 //        "sku_id" => "12000034939242508",
 //    ]);
 
-    $placeOrder = $aliDrop->orders()->placeOrder([
-       "order_id" => "abc12344",
-        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
-        "city" => "Sunyani",
-        "province" => "Bono Region",
-        "postcode" => "00233",
-        "phone_number" => "233553872291",
-        "full_name" => "Prince Takyi Akomea",
-        "country" => "GH",
-        "items" => [
-            [
-                "product_id" => 1005005939127124,
-                "quantity" => 1,
-                "sku_id" => "12000034939242508",
-                "shipping_service" => "AliExpress Standard Shipping",
-                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
-            ]
-        ]
-    ]);
+    $kuAttr = "14:10#PL2303;200000555:200006444#3";
+
+    $egOrderNumber = "3043208031562816";
+    $egOrderNumber2 = "3043104342182816";
+    $egOrderNumber3 = "3043170441622816";
+//    $placeOrder = $aliDrop->orders()->place_order([
+//       "order_id" => "abc12344997aw",
+//        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
+//        "city" => "Sunyani",
+//        "province" => "Bono Region",
+//        "postcode" => "00233",
+//        "phone_number" => "553872291",
+//        "phone_code" => "233",
+//        "full_name" => "Prince Takyi Akomea",
+//        "country" => "GH",
+//        "items" => [
+////            [
+////                "product_id" => 1005005939127124,
+////                "quantity" => 1,
+////                "sku_attr" => $kuAttr, # sku attribute not sku id
+////                "shipping_service" => "CAINIAO_FULFILLMENT_STD",
+////                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
+////            ],
+//            [
+//                "product_id" => 1005007773422239,
+//                "quantity" => 1,
+//                "sku_attr" => "136:173#Spiral shape", # sku attribute not sku id
+//                "shipping_service" => "CAINIAO_FULFILLMENT_STD",
+//                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
+//            ]
+//        ]
+//    ]);
+
+    $order = $aliDrop->orders()->order_details($egOrderNumber3);
 
     echo '<pre>';
-    echo json_encode($placeOrder, JSON_PRETTY_PRINT);
+    echo json_encode($order, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
