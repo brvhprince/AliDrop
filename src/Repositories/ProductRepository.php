@@ -131,8 +131,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             throw new ApiException('Failed to fetch product details', 427);
         }
         try {
-            // log info
-            $this->logInfo('Product details fetched successfully', $this->results);
             return new SingleProduct($this->results['aliexpress_ds_product_get_response']['result']);
 
         } catch (\Exception $e) {

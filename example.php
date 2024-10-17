@@ -45,8 +45,9 @@ try {
     $egOrderNumber4 = "3040800007322816"; // with tracking data
     $egOrderNumber5 = "3039084356962816"; // with tracking data
     $egOrderNumber6 = "3039955270632816"; // with tracking data
+    $egOrderNumber7 = "3043231255042816";
 //    $placeOrder = $aliDrop->orders()->place_order([
-//       "order_id" => "abc12344997aw",
+//       "order_id" => "87220348832223",
 //        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
 //        "city" => "Sunyani",
 //        "province" => "Bono Region",
@@ -64,21 +65,21 @@ try {
 ////                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
 ////            ],
 //            [
-//                "product_id" => 1005007773422239,
+//                "product_id" => 1005005650269591,
 //                "quantity" => 1,
-//                "sku_attr" => "136:173#Spiral shape", # sku attribute not sku id
+//                "sku_attr" => "", # sku attribute not sku id
 //                "shipping_service" => "CAINIAO_FULFILLMENT_STD",
 //                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
 //            ]
 //        ]
 //    ]);
 
-//    $order = $aliDrop->orders()->order_details($egOrderNumber4);
+//    $order = $aliDrop->orders()->order_details($egOrderNumber7);
 
 //    $orderTracking = $aliDrop->orders()->track_order($egOrderNumber5);
 
     echo '<pre>';
-    echo json_encode($product->toArray(), JSON_PRETTY_PRINT);
+    echo json_encode($product, JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
