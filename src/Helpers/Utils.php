@@ -21,12 +21,13 @@ class Utils
             '@<script[^>]*?>.*?</script>@si', // Strip out javascript
             '@<[/!]*?[^<>]*?>@si', // Strip out HTML tags
             '@<style[^>]*?>.*?</style>@siU', // Strip style tags properly
-            '@<![\s\S]*?--[ \t\n\r]*>@' // Strip multi-line comments
+            '@<![\s\S]*?--[ \t\n\r]*>@', // Strip multi-line comments
         );
 
         $string = preg_replace($search, '', $html);
         $string = html_entity_decode($string, ENT_QUOTES);
-//        return strip_tags($string);
+        // remove \n, \r, \t, \s
+        $string = preg_replace('/\s+/', ' ', $string);
         return htmlspecialchars_decode($string, ENT_QUOTES);
 
     }
