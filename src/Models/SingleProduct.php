@@ -82,6 +82,7 @@ class SingleProduct
     public float $average_rating;
     /**
      * @var string Product status
+     * one of [offline,onSelling]
      */
     public string $status;
     /**

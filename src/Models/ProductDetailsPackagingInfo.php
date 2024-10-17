@@ -15,21 +15,21 @@ namespace Wanpeninsula\AliDrop\Models;
 class ProductDetailsPackagingInfo
 {
     /**
-     * @var string Product height in centimeters
+     * @var int Product height in centimeters
      */
-    public string $height;
+    public int $height;
     /**
-     * @var string Product length in centimeters
+     * @var int Product length in centimeters
      */
-    public string $length;
+    public int $length;
     /**
-     * @var string Product weight in kilograms
+     * @var float Product weight in kilograms
      */
-    public string $weight;
+    public float $weight;
     /**
-     * @var string Product width in centimeters
+     * @var int Product width in centimeters
      */
-    public string $width;
+    public int $width;
 
     /**
      * @param array{

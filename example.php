@@ -25,12 +25,12 @@ try {
 //    $products = $aliDrop->products()->search([
 //        'query' => 'sconces',
 //    ]);
-    $product = $aliDrop->products()->single_product("1005005023937493");
+//    $product = $aliDrop->products()->single_product("1005005023937493");
 //    $product = $aliDrop->products()->single_product("1005005944221558");
 //    $product = $aliDrop->products()->single_product("1005005913156223");
 //    $product = $aliDrop->products()->single_product("1005005650269591");
 //    $product = $aliDrop->products()->single_product("1005006108799856");
-//    $product = $aliDrop->products()->single_product("1005007300319392");
+    $product = $aliDrop->products()->single_product("1005007300319392");
 //    $categories = $aliDrop->products()->categories();
 //    $category = $aliDrop->products()->category("201376702");
 //    $deliveryOptions = $aliDrop->products()->deliveryOptions([
@@ -84,6 +84,7 @@ try {
 
     echo '<pre>';
     echo json_encode($product, JSON_PRETTY_PRINT);
+//    echo json_encode($aliDrop::utils()::extractVariationAttributes($product->pricing), JSON_PRETTY_PRINT);
     echo '</pre>';
 } catch (ValidationException|ApiException $e) {
 }
