@@ -277,19 +277,17 @@ class Client implements ApiClientInterface
             $client = new IopClient($this->tokenUrl, $this->appKey, $this->secretKey);
 
             $request = new IopRequest('/auth/token/create');
-            $request->addApiParam('code','3_509710_41GJkHafEq9BCdPMNZiq3Bzg2139');
+            $request->addApiParam('code','3_509710_8N31ko4qemTaQ4M3WGSqoeDr1816');
 
-            $this->logInfo("Requesting access token", ['request' => $request]);
             $response = $client->execute($request);
 
             $response = json_decode($response, true);
-
             if (isset($response['access_token'])) {
                 $token = [
                     'access_token' => $response['access_token'],
-                    'expire_time' => time() + floor($response['expire_time'] / 1000),
+                    'expire_time' => floor($response['expire_time'] / 1000),
                     'refresh_token' => $response['refresh_token'],
-                    'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
+                    'refresh_time' => floor($response['refresh_token_valid_time'] / 1000)
                 ];
 
                 file_put_contents($tokenFile, json_encode($token));
@@ -318,6 +316,7 @@ class Client implements ApiClientInterface
      */
     public function refreshAccessToken(string $refreshToken): string
     {
+        $this->logInfo("Refreshing the access token");
         $tokenFile = 'access.json';
 
         if (file_exists($tokenFile)) {
@@ -340,9 +339,9 @@ class Client implements ApiClientInterface
             if (isset($response['access_token'])) {
                 $token = [
                     'access_token' => $response['access_token'],
-                    'expire_time' => time() + floor($response['expire_time'] / 1000),
+                    'expire_time' => floor($response['expire_time'] / 1000),
                     'refresh_token' => $response['refresh_token'],
-                    'refresh_time' => time() + ($response['refresh_expires_in'] * 1000)
+                    'refresh_time' => floor($response['refresh_token_valid_time'] / 1000)
                 ];
 
                 file_put_contents($tokenFile, json_encode($token));

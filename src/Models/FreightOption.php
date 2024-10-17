@@ -114,7 +114,7 @@ class FreightOption
         $this->estimated_delivery_time = $option['estimated_delivery_time'] ?? null;
         $this->delivery_date_desc = $option['delivery_date_desc'] ?? null;
         $this->shipping_country = $option['ship_from_country'];
-        $this->stock = $option['available_stock'];
+        $this->stock = $option['available_stock'] ?? 0;
 
     }
 

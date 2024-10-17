@@ -110,7 +110,7 @@ class ProductDetailsVariation
         $this->sale_price = $sku['offer_sale_price'];
         $this->regular_price = $sku['sku_price'];
         $this->currency_code = $sku['currency_code'];
-        $this->stock = $sku['sku_available_stock'];
+        $this->stock = $sku['sku_available_stock'] ?? $sku['ipm_sku_stock'];
         $this->id = $sku['id'];
         $this->sku_code = $sku['sku_code'] ?? null;
         $this->promotion_limit = $sku['buy_amount_limit_set_by_promotion'] ?? null;
@@ -126,6 +126,25 @@ class ProductDetailsVariation
             $this->variation = null;
         }
 
+    }
+
+    public function __toArray(): array
+    {
+        return [
+            'sku_attr' => $this->sku_attr,
+            'sku_id' => $this->sku_id,
+            'sale_price' => $this->sale_price,
+            'regular_price' => $this->regular_price,
+            'currency_code' => $this->currency_code,
+            'stock' => $this->stock,
+            'id' => $this->id,
+            'sku_code' => $this->sku_code,
+            'variation' => $this->variation,
+            'promotion_limit' => $this->promotion_limit,
+            'price_include_tax' => $this->price_include_tax,
+            'limit_strategy' => $this->limit_strategy,
+            'stock_available' => $this->stock_available
+        ];
     }
 
 }

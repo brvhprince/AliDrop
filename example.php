@@ -25,16 +25,18 @@ try {
 //    $products = $aliDrop->products()->search([
 //        'query' => 'sconces',
 //    ]);
-//    $product = $aliDrop->products()->single_product("1005005023937493");
-    $product = $aliDrop->products()->single_product("1005005944221558");
+    $product = $aliDrop->products()->single_product("1005005023937493");
+//    $product = $aliDrop->products()->single_product("1005005944221558");
 //    $product = $aliDrop->products()->single_product("1005005913156223");
 //    $product = $aliDrop->products()->single_product("1005005650269591");
+//    $product = $aliDrop->products()->single_product("1005006108799856");
+//    $product = $aliDrop->products()->single_product("1005007300319392");
 //    $categories = $aliDrop->products()->categories();
 //    $category = $aliDrop->products()->category("201376702");
 //    $deliveryOptions = $aliDrop->products()->deliveryOptions([
-//        "product_id" => "1005005939127124",
+//        "product_id" => "1005007300319392",
 //        "quantity" => 1,
-//        "sku_id" => "12000034939242508",
+//        "sku_id" => "12000040116315828",
 //    ]);
 
     $kuAttr = "14:10#PL2303;200000555:200006444#3";
@@ -46,8 +48,10 @@ try {
     $egOrderNumber5 = "3039084356962816"; // with tracking data
     $egOrderNumber6 = "3039955270632816"; // with tracking data
     $egOrderNumber7 = "3043231255042816";
+    $egOrderNumber8 = "3043162422642816";
+    $egOrderNumber9 = "3043162422662816";
 //    $placeOrder = $aliDrop->orders()->place_order([
-//       "order_id" => "87220348832223",
+//       "order_id" => "85ghr54666",
 //        "address" => "Abesim, Olistar SHS off Nkrankrom Road",
 //        "city" => "Sunyani",
 //        "province" => "Bono Region",
@@ -57,24 +61,24 @@ try {
 //        "full_name" => "Prince Takyi Akomea",
 //        "country" => "GH",
 //        "items" => [
-////            [
-////                "product_id" => 1005005939127124,
-////                "quantity" => 1,
-////                "sku_attr" => $kuAttr, # sku attribute not sku id
-////                "shipping_service" => "CAINIAO_FULFILLMENT_STD",
-////                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
-////            ],
 //            [
-//                "product_id" => 1005005650269591,
+//                "product_id" => 1005007300319392,
 //                "quantity" => 1,
-//                "sku_attr" => "", # sku attribute not sku id
-//                "shipping_service" => "CAINIAO_FULFILLMENT_STD",
+//                "sku_attr" => "14:200002984#5V USB Powered;136:865#1pc", # sku attribute not sku id
+//                "shipping_service" => "CAINIAO_STANDARD",
+//                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
+//            ],
+//            [
+//                "product_id" => 1005006108799856,
+//                "quantity" => 2,
+//                "sku_attr" => "136:200002572#APP with RC Dimmable;200000531:193#8 head", # sku attribute not sku id
+//                "shipping_service" => "FEDEX_IE",
 //                "comment" => "Please handle with care. This is a dropshipping order please do not include any promotional materials."
 //            ]
 //        ]
 //    ]);
 
-//    $order = $aliDrop->orders()->order_details($egOrderNumber7);
+//    $order = $aliDrop->orders()->order_details($egOrderNumber9);
 
 //    $orderTracking = $aliDrop->orders()->track_order($egOrderNumber5);
 

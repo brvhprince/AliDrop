@@ -108,6 +108,7 @@ class SingleProduct
     /**
      * @param array $productDetails
      */
+
     public function __construct(array $productDetails)
     {
         $productInfo = $productDetails['ae_item_base_info_dto'];
@@ -150,6 +151,8 @@ class SingleProduct
         else {
             $this->shipping_lead_time = null;
         }
+
+        $this->packaging_info = new ProductDetailsPackagingInfo($productDetails['package_info_dto']);
 
         $variations = $productDetails['ae_item_sku_info_dtos']['ae_item_sku_info_d_t_o'];
         $this->pricing = array_map(fn($variation) => new ProductDetailsVariation($variation), $variations);

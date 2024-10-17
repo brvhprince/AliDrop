@@ -14,6 +14,7 @@ namespace Wanpeninsula\AliDrop;
 
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Api\Client;
+use Wanpeninsula\AliDrop\Helpers\Utils;
 use Wanpeninsula\AliDrop\Services\OrderService;
 use Wanpeninsula\AliDrop\Services\ProductService;
 
@@ -33,6 +34,10 @@ class AliDrop
     public function products(): ProductService
     {
         return new ProductService($this->apiClient);
+    }
+    public static function utils(): Utils
+    {
+        return new Utils();
     }
     public function orders(): OrderService
     {
