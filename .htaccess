@@ -1,5 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^alidrop$ callback.php [NC,QSA]
-RewriteRule ^alidrop/(.*)$ callback.php?page=$1 [NC,QSA]

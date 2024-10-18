@@ -15,8 +15,7 @@ return [
     'log_file' => 'alidrop.log',
     'log_dir' => 'logs',
     'log_max_files' => 5,
-//    "callback_url" => "https://yourwebsite.com/alidrop",
-    "callback_url" => "https://smart.penny.codes/callback.php",
+    "callback_url" => "https://yourwebsite.com/alidrop",
     "token_storage" => "file", // file or db
     "token_file" => "token.json",
     "db" => [
