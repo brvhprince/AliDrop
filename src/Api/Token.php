@@ -217,7 +217,7 @@ class Token
         else {
             $sql = "INSERT INTO $table (access_token, expire_time, refresh_token, refresh_time) VALUES (?, ?, ?, ?)";
         }
-        
+
         $stmt = self::$db->prepare($sql);
 
         $stmt->bind_param("sisi", $token['access_token'], $token['expire_time'], $token['refresh_token'], $token['refresh_time']);
