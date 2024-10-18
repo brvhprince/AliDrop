@@ -11,3 +11,4 @@ product*.json
 extract.php
 test.php
 token.json
+alidrop/*
