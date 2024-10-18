@@ -11,7 +11,8 @@
  */
 
 namespace Pennycodes\AliDrop\Api;
-require_once "lib/ae-php-sdk/IopSdk.php";
+require_once __DIR__. "/../../lib/ae-php-sdk/IopSdk.php";
+
 
 use IopClient;
 use IopRequest;
@@ -205,8 +206,18 @@ class Token
 
         $table = $this->config['db']['table_prefix'] . 'tokens';
 
-        $sql = "INSERT INTO $table (access_token, expire_time, refresh_token, refresh_time) VALUES (?, ?, ?, ?)";
+        // first get access token from the database
+        $tmp = "SELECT * FROM $table WHERE id = 1";
 
+        $result = self::$db->query($tmp);
+
+        if ($result->num_rows > 0) {
+            $sql = "UPDATE $table SET access_token = ?, expire_time = ?, refresh_token = ?, refresh_time = ? WHERE id = 1";
+        }
+        else {
+            $sql = "INSERT INTO $table (access_token, expire_time, refresh_token, refresh_time) VALUES (?, ?, ?, ?)";
+        }
+        
         $stmt = self::$db->prepare($sql);
 
         $stmt->bind_param("sisi", $token['access_token'], $token['expire_time'], $token['refresh_token'], $token['refresh_time']);

@@ -12,7 +12,7 @@ declare(strict_types=1);
  */
 namespace Pennycodes\AliDrop\Api;
 
-require_once "lib/ae-php-sdk/IopSdk.php";
+require_once __DIR__. "/../../lib/ae-php-sdk/IopSdk.php";
 
 use IopClient;
 use IopRequest;
