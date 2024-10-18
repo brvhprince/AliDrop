@@ -19,16 +19,20 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
+use Wanpeninsula\AliDrop\Exceptions\ApiException;
 
 class Logger implements LoggerInterface
 {
     private static Logger|null $instance = null;
     private MonologLogger $logger;
 
+    /**
+     */
     private function __construct()
     {
         // Get configuration
-        $config = $this->getConfig();
+        $configLoader = new Config();
+        $config = $configLoader->getConfig();
 
         // Create Monolog logger instance
         $this->logger = new MonologLogger('alidrop');
@@ -109,11 +113,5 @@ class Logger implements LoggerInterface
     public function warning($message, array $context = []): void
     {
         $this->logger->warning($message, $context);
-    }
-
-    private function getConfig(): array
-    {
-        $configPath = __DIR__ . '/../../config/alidrop.php';
-        return include $configPath;
     }
 }

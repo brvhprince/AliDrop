@@ -20,9 +20,10 @@ interface ApiClientInterface
     /**
      * @param string $appKey
      * @param string $secretKey
+     * @param string $accessToken
      * @throws ApiException
      */
-    public function __construct(string $appKey, string $secretKey);
+    public function __construct(string $appKey, string $secretKey, string $accessToken);
 
     public function requestName(string $name);
 

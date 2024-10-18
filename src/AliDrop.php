@@ -12,8 +12,10 @@
 
 namespace Wanpeninsula\AliDrop;
 
+use Wanpeninsula\AliDrop\Api\Token;
 use Wanpeninsula\AliDrop\Exceptions\ApiException;
 use Wanpeninsula\AliDrop\Api\Client;
+use Wanpeninsula\AliDrop\Helpers\Localization;
 use Wanpeninsula\AliDrop\Helpers\Utils;
 use Wanpeninsula\AliDrop\Services\OrderService;
 use Wanpeninsula\AliDrop\Services\ProductService;
@@ -22,13 +24,15 @@ class AliDrop
 {
 
     private Client $apiClient;
+    private Token $token;
 
     /**
      * @throws ApiException
      */
     public function __construct(string $appKey, string $secretKey)
     {
-        $this->apiClient = new Client($appKey, $secretKey);
+        $this->token = new Token($appKey, $secretKey);
+        $this->apiClient = new Client($appKey, $secretKey, $this->token->access_token);
     }
 
     public function products(): ProductService
@@ -38,6 +42,14 @@ class AliDrop
     public static function utils(): Utils
     {
         return new Utils();
+    }
+    public function localization(): Localization
+    {
+        return new Localization();
+    }
+    public function token(): Token
+    {
+        return $this->token;
     }
     public function orders(): OrderService
     {

@@ -17,6 +17,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "monolog/monolog": "^3.7"
+        "monolog/monolog": "^3.7",
+      "ext-mysqli": "*"
     }
 }
