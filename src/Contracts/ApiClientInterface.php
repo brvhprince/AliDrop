@@ -11,9 +11,9 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Contracts;
+namespace Pennycodes\AliDrop\Contracts;
 
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ApiException;
 
 interface ApiClientInterface
 {

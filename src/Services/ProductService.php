@@ -11,17 +11,17 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Services;
+namespace Pennycodes\AliDrop\Services;
 
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
-use Wanpeninsula\AliDrop\Exceptions\ValidationException;
-use Wanpeninsula\AliDrop\Api\Client;
-use Wanpeninsula\AliDrop\Models\Categories;
-use Wanpeninsula\AliDrop\Models\FreightOption;
-use Wanpeninsula\AliDrop\Models\Product;
-use Wanpeninsula\AliDrop\Models\SingleCategory;
-use Wanpeninsula\AliDrop\Models\SingleProduct;
-use Wanpeninsula\AliDrop\Repositories\ProductRepository;
+use Pennycodes\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ValidationException;
+use Pennycodes\AliDrop\Api\Client;
+use Pennycodes\AliDrop\Models\Categories;
+use Pennycodes\AliDrop\Models\FreightOption;
+use Pennycodes\AliDrop\Models\Product;
+use Pennycodes\AliDrop\Models\SingleCategory;
+use Pennycodes\AliDrop\Models\SingleProduct;
+use Pennycodes\AliDrop\Repositories\ProductRepository;
 
 class ProductService
 {

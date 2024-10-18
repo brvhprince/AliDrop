@@ -11,9 +11,9 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Traits;
+namespace Pennycodes\AliDrop\Traits;
 
-use Wanpeninsula\AliDrop\Helpers\Logger;
+use Pennycodes\AliDrop\Helpers\Logger;
 trait LoggerTrait
 {
     protected function log($level, $message, array $context = []): void

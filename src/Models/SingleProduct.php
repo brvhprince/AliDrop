@@ -10,9 +10,9 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Models;
+namespace Pennycodes\AliDrop\Models;
 
-use Wanpeninsula\AliDrop\Helpers\Utils;
+use Pennycodes\AliDrop\Helpers\Utils;
 
 class SingleProduct
 {

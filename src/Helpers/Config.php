@@ -10,9 +10,9 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Helpers;
+namespace Pennycodes\AliDrop\Helpers;
 
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ApiException;
 
 class Config
 {

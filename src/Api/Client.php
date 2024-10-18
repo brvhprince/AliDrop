@@ -10,17 +10,17 @@ declare(strict_types=1);
  *
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
-namespace Wanpeninsula\AliDrop\Api;
+namespace Pennycodes\AliDrop\Api;
 
 require_once "lib/ae-php-sdk/IopSdk.php";
 
 use IopClient;
 use IopRequest;
-use Wanpeninsula\AliDrop\Contracts\ApiClientInterface;
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
-use Wanpeninsula\AliDrop\Exceptions\ValidationException;
-use Wanpeninsula\AliDrop\Helpers\Validator;
-use Wanpeninsula\AliDrop\Traits\LoggerTrait;
+use Pennycodes\AliDrop\Contracts\ApiClientInterface;
+use Pennycodes\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ValidationException;
+use Pennycodes\AliDrop\Helpers\Validator;
+use Pennycodes\AliDrop\Traits\LoggerTrait;
 
 
 class Client implements ApiClientInterface

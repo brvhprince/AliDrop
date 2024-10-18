@@ -10,9 +10,9 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Contracts;
+namespace Pennycodes\AliDrop\Contracts;
 
-use Wanpeninsula\AliDrop\Models\SingleProduct;
+use Pennycodes\AliDrop\Models\SingleProduct;
 
 interface ProductRepositoryInterface extends RepositoryInterface
 {

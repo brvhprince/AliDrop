@@ -10,15 +10,15 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop;
+namespace Pennycodes\AliDrop;
 
-use Wanpeninsula\AliDrop\Api\Token;
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
-use Wanpeninsula\AliDrop\Api\Client;
-use Wanpeninsula\AliDrop\Helpers\Localization;
-use Wanpeninsula\AliDrop\Helpers\Utils;
-use Wanpeninsula\AliDrop\Services\OrderService;
-use Wanpeninsula\AliDrop\Services\ProductService;
+use Pennycodes\AliDrop\Api\Token;
+use Pennycodes\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Api\Client;
+use Pennycodes\AliDrop\Helpers\Localization;
+use Pennycodes\AliDrop\Helpers\Utils;
+use Pennycodes\AliDrop\Services\OrderService;
+use Pennycodes\AliDrop\Services\ProductService;
 
 class AliDrop
 {

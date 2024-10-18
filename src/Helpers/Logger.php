@@ -11,15 +11,15 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Helpers;
+namespace Pennycodes\AliDrop\Helpers;
 
-use Wanpeninsula\AliDrop\Contracts\LoggerInterface;
+use Pennycodes\AliDrop\Contracts\LoggerInterface;
 use Monolog\Logger as MonologLogger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Formatter\LineFormatter;
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ApiException;
 
 class Logger implements LoggerInterface
 {

@@ -10,10 +10,10 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Contracts;
+namespace Pennycodes\AliDrop\Contracts;
 
-use Wanpeninsula\AliDrop\Models\OrderDetails;
-use Wanpeninsula\AliDrop\Models\TrackingDetails;
+use Pennycodes\AliDrop\Models\OrderDetails;
+use Pennycodes\AliDrop\Models\TrackingDetails;
 
 interface OrderRepositoryInterface
 {

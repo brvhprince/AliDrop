@@ -10,15 +10,15 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Api;
+namespace Pennycodes\AliDrop\Api;
 require_once "lib/ae-php-sdk/IopSdk.php";
 
 use IopClient;
 use IopRequest;
 use mysqli;
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
-use Wanpeninsula\AliDrop\Helpers\Config;
-use Wanpeninsula\AliDrop\Traits\LoggerTrait;
+use Pennycodes\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Helpers\Config;
+use Pennycodes\AliDrop\Traits\LoggerTrait;
 
 class Token
 {

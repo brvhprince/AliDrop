@@ -11,10 +11,10 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Helpers;
+namespace Pennycodes\AliDrop\Helpers;
 
-use Wanpeninsula\AliDrop\Contracts\ValidationInterface;
-use Wanpeninsula\AliDrop\Exceptions\ValidationException;
+use Pennycodes\AliDrop\Contracts\ValidationInterface;
+use Pennycodes\AliDrop\Exceptions\ValidationException;
 
 class Validator implements ValidationInterface
 {

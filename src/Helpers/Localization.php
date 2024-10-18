@@ -11,10 +11,10 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Helpers;
+namespace Pennycodes\AliDrop\Helpers;
 
-use Wanpeninsula\AliDrop\Contracts\LocalizationInterface;
-use Wanpeninsula\AliDrop\Traits\LoggerTrait;
+use Pennycodes\AliDrop\Contracts\LocalizationInterface;
+use Pennycodes\AliDrop\Traits\LoggerTrait;
 
 class Localization implements LocalizationInterface
 {

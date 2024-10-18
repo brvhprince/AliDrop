@@ -11,10 +11,10 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Repositories;
+namespace Pennycodes\AliDrop\Repositories;
 
-use Wanpeninsula\AliDrop\Api\Client;
-use Wanpeninsula\AliDrop\Contracts\BaseRepositoryInterface;
+use Pennycodes\AliDrop\Api\Client;
+use Pennycodes\AliDrop\Contracts\BaseRepositoryInterface;
 
 class BaseRepository implements BaseRepositoryInterface
 {

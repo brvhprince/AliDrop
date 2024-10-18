@@ -10,7 +10,7 @@
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Models;
+namespace Pennycodes\AliDrop\Models;
 
 class Categories
 {

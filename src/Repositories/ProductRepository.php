@@ -11,18 +11,18 @@ declare(strict_types=1);
  * Copyright (c) 2024 Colorbrace LLC. All rights reserved.
  */
 
-namespace Wanpeninsula\AliDrop\Repositories;
+namespace Pennycodes\AliDrop\Repositories;
 
-use Wanpeninsula\AliDrop\Exceptions\ApiException;
-use Wanpeninsula\AliDrop\Exceptions\ValidationException;
-use Wanpeninsula\AliDrop\Models\Categories;
-use Wanpeninsula\AliDrop\Models\FreightOption;
-use Wanpeninsula\AliDrop\Models\Product;
-use Wanpeninsula\AliDrop\Models\SingleCategory;
-use Wanpeninsula\AliDrop\Models\SingleProduct;
-use Wanpeninsula\AliDrop\Traits\LoggerTrait;
-use Wanpeninsula\AliDrop\Contracts\ProductRepositoryInterface;
-use Wanpeninsula\AliDrop\Helpers\Localization;
+use Pennycodes\AliDrop\Exceptions\ApiException;
+use Pennycodes\AliDrop\Exceptions\ValidationException;
+use Pennycodes\AliDrop\Models\Categories;
+use Pennycodes\AliDrop\Models\FreightOption;
+use Pennycodes\AliDrop\Models\Product;
+use Pennycodes\AliDrop\Models\SingleCategory;
+use Pennycodes\AliDrop\Models\SingleProduct;
+use Pennycodes\AliDrop\Traits\LoggerTrait;
+use Pennycodes\AliDrop\Contracts\ProductRepositoryInterface;
+use Pennycodes\AliDrop\Helpers\Localization;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
