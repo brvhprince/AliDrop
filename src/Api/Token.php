@@ -71,6 +71,13 @@ class Token
      * @since 1.0.0
      */
     protected string $secretKey;
+    /**
+     * @var string
+     * @access protected
+     * <p>If set will override config.callback_url</p>
+     * @since 1.1.0
+     */
+    protected ?string $callback_url;
 
     /**
      * @var false|mysqli $db
@@ -92,6 +99,7 @@ class Token
         $this->access_token_expire_time = 0;
         $this->refresh_token = '';
         $this->refresh_token_expire_time = 0;
+        $this->callback_url = null;
         $config = new Config();
         $this->config = $config->getConfig();
 
@@ -305,7 +313,7 @@ class Token
     public function generateAccessLink(): string
 
     {
-        $redirectUrl = $this->config['callback_url'];
+        $redirectUrl = $this->callback_url ?? $this->config['callback_url'];
         return "https://api-sg.aliexpress.com/oauth/authorize?response_type=code&force_auth=true&client_id={$this->appKey}&redirect_uri={$redirectUrl}";
     }
 
@@ -378,5 +386,12 @@ class Token
         $this->tokenUrl = $url;
     }
 
+    /**
+     * Set the callback URL
+     */
+    public function setCallbackUrl(string $url): void
+    {
+        $this->callback_url = $url;
+    }
 
 }

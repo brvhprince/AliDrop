@@ -43,7 +43,7 @@ class AliDrop
     {
         return new Utils();
     }
-    public function localization(): Localization
+    public static function localization(): Localization
     {
         return new Localization();
     }
