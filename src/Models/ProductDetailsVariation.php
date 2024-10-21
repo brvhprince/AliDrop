@@ -27,6 +27,10 @@ class ProductDetailsVariation
      */
     public string $sale_price;
     /**
+     * @var ?string  Bulk Sale price
+     */
+    public ?string $bulk_sale_price;
+    /**
      * @var string Regular price
      */
     public string $regular_price;
@@ -108,6 +112,7 @@ class ProductDetailsVariation
         $this->sku_attr = $sku['sku_attr'];
         $this->sku_id = $sku['sku_id'];
         $this->sale_price = $sku['offer_sale_price'];
+        $this->bulk_sale_price = $sku['offer_bulk_sale_price'] ?? null;
         $this->regular_price = $sku['sku_price'];
         $this->currency_code = $sku['currency_code'];
         $this->stock = $sku['sku_available_stock'] ?? $sku['ipm_sku_stock'];
@@ -134,6 +139,7 @@ class ProductDetailsVariation
             'sku_attr' => $this->sku_attr,
             'sku_id' => $this->sku_id,
             'sale_price' => $this->sale_price,
+            'bulk_sale_price' => $this->bulk_sale_price,
             'regular_price' => $this->regular_price,
             'currency_code' => $this->currency_code,
             'stock' => $this->stock,
