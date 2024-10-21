@@ -182,7 +182,7 @@ class Token
 
         $table = $this->config['db']['table_prefix'] . 'tokens';
 
-        $sql = "SELECT * FROM $table ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT * FROM $table WHERE id = 1";
 
         $result = self::$db->query($sql);
 
@@ -223,12 +223,12 @@ class Token
             $sql = "UPDATE $table SET access_token = ?, expire_time = ?, refresh_token = ?, refresh_time = ? WHERE id = 1";
         }
         else {
-            $sql = "INSERT INTO $table (access_token, expire_time, refresh_token, refresh_time) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO $table (id, access_token, expire_time, refresh_token, refresh_time) VALUES (?, ?, ?, ?, ?)";
         }
 
         $stmt = self::$db->prepare($sql);
-
-        $stmt->bind_param("sisi", $token['access_token'], $token['expire_time'], $token['refresh_token'], $token['refresh_time']);
+        $id = 1;
+        $stmt->bind_param("isisi", $id,$token['access_token'], $token['expire_time'], $token['refresh_token'], $token['refresh_time']);
 
         if ($stmt->execute() === false) {
             $this->logError("Failed to save the token to the database", ['error' => self::$db->error]);
