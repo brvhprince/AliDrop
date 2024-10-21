@@ -228,6 +228,7 @@ class Token
 
         $stmt = self::$db->prepare($sql);
         $id = 1;
+        
         $stmt->bind_param("isisi", $id,$token['access_token'], $token['expire_time'], $token['refresh_token'], $token['refresh_time']);
 
         if ($stmt->execute() === false) {
