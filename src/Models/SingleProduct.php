@@ -138,8 +138,11 @@ class SingleProduct
         $properties = array_filter($properties,
             fn($property) => (isset($property['attr_name_id']) && $property['attr_name_id'] !== -1) || (isset($property['attr_value_id']) && $property['attr_value_id'] !== -1));
 
-        $this->properties = array_map(
-            fn($property) => new ProductDetailsProperties($property), $properties);
+        $this->properties = [];
+        foreach ($properties as $property) {
+            $this->properties[] = new ProductDetailsProperties($property);
+        }
+
 
 
         // Shipping lead time
