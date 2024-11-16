@@ -58,7 +58,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $this->processResults($response);
 
-        if (empty($this->results) || (!isset($this->results['aliexpress_ds_text_search_response'])) || $this->results['aliexpress_ds_text_search_response']['code'] != '00') {
+        if (empty($this->results) || (
+            !isset($this->results['aliexpress_ds_text_search_response'])) ||
+            $this->results['aliexpress_ds_text_search_response']['msg'] ||
+            $this->results['aliexpress_ds_text_search_response']['code'] != '00') {
             $this->logError('Failed to fetch products', $this->results);
             throw new ApiException('Failed to fetch products', 427);
         }

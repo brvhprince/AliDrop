@@ -31,5 +31,6 @@ interface LocalizationInterface
     public function getCurrencyCodes() : array;
     public function getLanguageCodes() : array;
     public function getCategoryIds();
+    public function getCountry( string $countryCode): array;
 
 }

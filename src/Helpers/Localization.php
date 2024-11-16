@@ -208,4 +208,19 @@ class Localization implements LocalizationInterface
         return array_column($this->categories, 'id');
     }
 
+    /**
+     * Get country by code
+     * @param string $countryCode
+     * @return array
+     */
+    public function getCountry(string $countryCode): array
+    {
+        foreach ($this->countries as $country) {
+            if ($country['code'] === $countryCode) {
+                return $country;
+            }
+        }
+        return [];
+    }
+
 }
