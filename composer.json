@@ -1,7 +1,7 @@
 {
     "name": "pennycodes/alidrop",
     "description": "AliExpress DropShipping API",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "keywords": ["alidrop", "alidropshipping", "alidropship", "alidropshiping", "alidropshipping.com", "alidropship.com", "alidropshiping.com", "alidropshipping plugin", "alidropship plugin", "alidropshiping plugin", "alidropshipping.com plugin", "alidropship.com plugin", "alidropshiping.com plugin", "alidropshipping api", "alidropship api", "alidropshiping api", "alidropshipping.com api", "alidropship.com api", "alidropshiping.com api"],
     "homepage": "https://github.com/brvhprince/AliDrop",
     "readme": "README.md",

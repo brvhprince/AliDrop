@@ -86,6 +86,7 @@ class Product
      */
     public function __construct(array $productDetails)
     {
+        // TODO: review response again and update the properties
         $this->categories = $productDetails['cateId'];
         $this->id = $productDetails['itemId'];
         $this->title = $productDetails['title'];
@@ -95,6 +96,6 @@ class Product
         $this->original_price = $productDetails['originalPriceFormat'] ?? null;
         $this->sale_price = $productDetails['salePriceFormat'];
         $this->score = (float) $productDetails['score'];
-        $this->price_info = json_decode($productDetails['salePrice'], true);
+//        $this->price_info = json_decode($productDetails['salePrice'], true);
     }
 }

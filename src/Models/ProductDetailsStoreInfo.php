@@ -28,17 +28,17 @@ class ProductDetailsStoreInfo
      */
     public string $country;
     /**
-     * @var float Store shipping rating
+     * @var ?float Store shipping rating
      */
-    public float $shipping_rating;
+    public ?float $shipping_rating;
     /**
-     * @var float Store communication rating
+     * @var ?float Store communication rating
      */
-    public float $communication_rating;
+    public ?float $communication_rating;
     /**
-     * @var float Store item as described rating
+     * @var ?float Store item as described rating
      */
-    public float $item_as_described_rating;
+    public ?float $item_as_described_rating;
 
     /**
      * @param array{
@@ -55,8 +55,8 @@ class ProductDetailsStoreInfo
         $this->id = $storeInfo['store_id'];
         $this->name = $storeInfo['store_name'];
         $this->country = $storeInfo['store_country_code'];
-        $this->shipping_rating = $storeInfo['shipping_speed_rating'];
-        $this->communication_rating = $storeInfo['communication_rating'];
-        $this->item_as_described_rating = $storeInfo['item_as_described_rating'];
+        $this->shipping_rating = $storeInfo['shipping_speed_rating'] ?? null;
+        $this->communication_rating = $storeInfo['communication_rating'] ?? null;
+        $this->item_as_described_rating = $storeInfo['item_as_described_rating'] ?? null;
     }
 }
